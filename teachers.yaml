@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Gestion de Professeurs
+  version: 1.0.0
+paths:
+  /professeurs:
+    get:
+      summary: Récupérer la liste des professeurs
+      responses:
+        '200':
+          description: Liste des professeurs récupérée avec succès
+  
+  /professeurs/ajout:
+    post:
+      summary: Ajouter un nouveau professeur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_professeur:
+                  type: integer
+                  format: int64
+                  description: 1
+                nom:
+                  type: string
+                  description: TOKY MAHERY
+                prenom:
+                  type: string
+                  description: RAMAROZAKA
+                cour:
+                  type: string
+                  description: PROG2
+                heure_cours:
+                  type: string
+                  description: 2H
+              required:
+                - nom
+                - prenom
+                - cour
+                - heure_cours
+      responses:
+        '201':
+          description: Professeur ajouté avec succès
+
+  /professeurs/{id}:
+    get:
+      summary: Récupérer les détails d'un professeur par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID du professeur à récupérer
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Détails du professeur récupérés avec succès
+        '404':
+          description: Professeur non trouvé
+
+    put:
+      summary: Mettre à jour les informations d'un professeur par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID du professeur à mettre à jour
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nom:
+                  type: string
+                  description: Nom du professeur
+                prenom:
+                  type: string
+                  description: Prénom du professeur
+                cour:
+                  type: string
+                  description: Cours du professeur
+                heure_cours:
+                  type: string
+                  description: Heure du cours du professeur
+      responses:
+        '200':
+          description: Professeur mis à jour avec succès
+        '404':
+          description: Professeur non trouvé
+
+    delete:
+      summary: Supprimer un professeur par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID du professeur à supprimer
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Professeur supprimé avec succès
+        '404':
+          description: Professeur non trouvé
